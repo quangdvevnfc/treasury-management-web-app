@@ -1,9 +1,9 @@
 import React from 'react';
 import Header from 'components/template/Header';
 import SideNavToggle from 'components/template/SideNavToggle';
-import SidePanel from 'components/template/SidePanel';
 import MobileNav from 'components/template/MobileNav';
 import UserDropdown from 'components/template/UserDropdown';
+import LanguageSelector from 'components/template/LanguageSelector';
 import SideNav from 'components/template/SideNav';
 import View from 'views';
 
@@ -19,7 +19,7 @@ const HeaderActionsStart = () => {
 const HeaderActionsEnd = () => {
   return (
     <>
-      <SidePanel />
+      <LanguageSelector />
       <UserDropdown hoverable={false} />
     </>
   );
