@@ -2,25 +2,26 @@ import React from 'react';
 import {Avatar, Dropdown} from 'components/ui';
 import withHeaderItem from 'utils/hoc/withHeaderItem';
 import useAuth from 'utils/hooks/useAuth';
-// import { useSelector } from 'react-redux'
+import {useSelector} from 'react-redux';
 import {Link} from 'react-router-dom';
 import classNames from 'classnames';
-import {HiOutlineUser, HiOutlineLogout} from 'react-icons/hi';
+import {HiOutlineLogout} from 'react-icons/hi';
 
 const dropdownItemList = [];
 
 export const UserDropdown = ({className}) => {
-  // bind this
-  // const userInfo = useSelector((state) => state.auth.user)
+  const {avatar, userName, authority, email} = useSelector(
+    (state) => state.auth.user
+  );
 
   const {signOut} = useAuth();
 
   const UserAvatar = (
     <div className={classNames(className, 'flex items-center gap-2')}>
-      <Avatar size={32} shape="circle" icon={<HiOutlineUser />} />
+      <Avatar size={32} shape="circle" src={avatar} />
       <div className="hidden md:block">
-        <div className="text-xs capitalize">admin</div>
-        <div className="font-bold">User01</div>
+        <div className="text-xs capitalize">{authority[0] || 'guest'}</div>
+        <div className="font-bold">{userName}</div>
       </div>
     </div>
   );
@@ -34,12 +35,12 @@ export const UserDropdown = ({className}) => {
       >
         <Dropdown.Item variant="header">
           <div className="py-2 px-3 flex items-center gap-2">
-            <Avatar shape="circle" icon={<HiOutlineUser />} />
+            <Avatar shape="circle" src={avatar} />
             <div>
               <div className="font-bold text-gray-900 dark:text-gray-100">
-                User01
+                {userName}
               </div>
-              <div className="text-xs">user01@mail.com</div>
+              <div className="text-xs">{email}</div>
             </div>
           </div>
         </Dropdown.Item>
@@ -56,7 +57,7 @@ export const UserDropdown = ({className}) => {
             </Link>
           </Dropdown.Item>
         ))}
-        {/* <Dropdown.Item variant="divider" /> */}
+        {/*<Dropdown.Item variant="divider" />*/}
         <Dropdown.Item onClick={signOut} eventKey="Sign Out" className="gap-2">
           <span className="text-xl opacity-50">
             <HiOutlineLogout />
