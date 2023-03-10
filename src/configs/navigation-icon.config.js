@@ -1,18 +1,14 @@
 import React from 'react';
 import {
-  HiOutlineColorSwatch,
-  HiOutlineDesktopComputer,
-  HiOutlineTemplate,
-  HiOutlineViewGridAdd,
   HiOutlineHome,
+  HiOutlineUserGroup,
+  HiOutlineViewGridAdd,
 } from 'react-icons/hi';
 
 const navigationIcon = {
   home: <HiOutlineHome />,
-  singleMenu: <HiOutlineViewGridAdd />,
-  collapseMenu: <HiOutlineTemplate />,
-  groupSingleMenu: <HiOutlineDesktopComputer />,
-  groupCollapseMenu: <HiOutlineColorSwatch />,
+  apps: <HiOutlineViewGridAdd />,
+  crm: <HiOutlineUserGroup />,
 };
 
 export default navigationIcon;
