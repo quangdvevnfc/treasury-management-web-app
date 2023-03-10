@@ -3,7 +3,12 @@ import appConfig from 'configs/app.config';
 
 import {signInUserData} from './data/authData';
 import {userDetailData, usersData} from './data/usersData';
-import {crmDashboardData, eventsData, mailData} from './data/crmData';
+import {
+  crmDashboardData,
+  customersData,
+  eventsData,
+  mailData,
+} from './data/crmData';
 
 import {authFakeApi, crmFakeApi} from './fakeApi';
 
@@ -20,6 +25,7 @@ export default function mockServer({environment = 'test'}) {
         eventsData,
         mailData,
         crmDashboardData,
+        customersData,
       });
     },
     routes() {

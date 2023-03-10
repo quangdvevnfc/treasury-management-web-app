@@ -13,9 +13,8 @@ export default function crmFakeApi(server, apiPrefix) {
     const body = JSON.parse(requestBody);
     const {pageIndex, pageSize, sort, query} = body;
     const {order, key} = sort;
-    const users = schema.db.userDetailData;
-    const sanitizeUsers = users.filter((elm) => typeof elm !== 'function');
-    let data = sanitizeUsers;
+    const users = schema.db.customersData;
+    let data = users.filter((elm) => typeof elm !== 'function');
     let total = users.length;
 
     if (key && order) {

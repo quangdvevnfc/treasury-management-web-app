@@ -5,5 +5,20 @@
     "appsCrm": {
       "customers": "Customers"
     }
+  },
+  "views": {
+    "appsCrm": {
+      "customerList": {
+        "table": {
+          "code": "Customer's Code",
+          "name": "Company Name",
+          "abbreviatedName": "Abbreviated Name",
+          "documentType": "Document Type",
+          "documentNumber": "Document Number",
+          "phoneNumber": "Phone Number",
+          "status": "Status"
+        }
+      }
+    }
   }
 }

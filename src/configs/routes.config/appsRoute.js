@@ -6,11 +6,8 @@ const appsRoute = [
   {
     key: 'appsCrm.customers',
     path: `${APP_PREFIX_PATH}/crm/customers`,
-    component: React.lazy(() => import('views/crm/Customers')),
+    component: React.lazy(() => import('views/crm/CustomerList')),
     authority: [ADMIN, USER],
-    meta: {
-      header: 'Customers',
-    },
   },
 ];
 
