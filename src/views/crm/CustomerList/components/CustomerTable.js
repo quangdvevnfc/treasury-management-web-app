@@ -35,7 +35,7 @@ const ActionColumn = ({row}) => {
   const navigate = useNavigate();
 
   const onEdit = () => {
-    navigate(`/app/crm/customer-edit/${row.id}`);
+    navigate(`/app/crm/customers/${row.id}`);
   };
 
   const onDelete = () => {

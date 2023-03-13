@@ -1,11 +1,11 @@
-import React, {useEffect} from 'react';
-import {Loading, DoubleSidedImage} from 'components/shared';
-import {toast, Notification} from 'components/ui';
+import React, {useCallback, useEffect} from 'react';
+import {DoubleSidedImage, Loading} from 'components/shared';
+import {Notification, toast} from 'components/ui';
 import {useDispatch, useSelector} from 'react-redux';
 import reducer from './store';
 import {injectReducer} from 'store/index';
-import {useLocation, useNavigate} from 'react-router-dom';
-import {getCustomer, updateCustomer, deleteCustomer} from './store/dataSlice';
+import {useNavigate, useParams} from 'react-router-dom';
+import {deleteCustomer, getCustomer, updateCustomer} from './store/dataSlice';
 import CustomerForm from 'views/crm/CustomerForm';
 import isEmpty from 'lodash/isEmpty';
 
@@ -14,7 +14,7 @@ injectReducer('customerEdit', reducer);
 const CustomerEdit = () => {
   const dispatch = useDispatch();
 
-  const location = useLocation();
+  const params = useParams();
   const navigate = useNavigate();
 
   const customerData = useSelector(
@@ -22,9 +22,12 @@ const CustomerEdit = () => {
   );
   const loading = useSelector((state) => state.customerEdit.data.loading);
 
-  const fetchData = (data) => {
-    dispatch(getCustomer(data));
-  };
+  const fetchData = useCallback(
+    (id) => {
+      dispatch(getCustomer(id));
+    },
+    [dispatch]
+  );
 
   const handleFormSubmit = async (values, setSubmitting) => {
     setSubmitting(true);
@@ -36,7 +39,7 @@ const CustomerEdit = () => {
   };
 
   const handleDiscard = () => {
-    navigate('/app/crm/customer-list');
+    navigate('/app/crm/customers');
   };
 
   const handleDelete = async (setDialogOpen) => {
@@ -50,27 +53,22 @@ const CustomerEdit = () => {
   const popNotification = (keyword) => {
     toast.push(
       <Notification
-        title={`Successfuly ${keyword}`}
+        title={`Successfully ${keyword}`}
         type="success"
         duration={2500}
       >
-        Customer successfuly {keyword}
+        Customer successfully {keyword}
       </Notification>,
       {
         placement: 'top-center',
       }
     );
-    navigate('/app/crm/customer-list');
+    navigate('/app/crm/customers');
   };
 
   useEffect(() => {
-    const path = location.pathname.substring(
-      location.pathname.lastIndexOf('/') + 1
-    );
-    const rquestParam = {id: path};
-    fetchData(rquestParam);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [location.pathname]);
+    fetchData(params.id);
+  }, [fetchData, params.id]);
 
   return (
     <>

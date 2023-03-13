@@ -1,15 +1,13 @@
 import React, {forwardRef, useState} from 'react';
-import {FormContainer, Button, hooks} from 'components/ui';
-import {StickyFooter, ConfirmDialog} from 'components/shared';
+import {Button, FormContainer, hooks} from 'components/ui';
+import {ConfirmDialog, StickyFooter} from 'components/shared';
 import {Form, Formik} from 'formik';
-import BasicInformationFields from './BasicInformationFields';
-import PricingFields from './PricingFields';
-import OrganizationFields from './OrganizationFields';
-import CustomerImages from './CustomerImages';
 import cloneDeep from 'lodash/cloneDeep';
 import {HiOutlineTrash} from 'react-icons/hi';
 import {AiOutlineSave} from 'react-icons/ai';
 import * as Yup from 'yup';
+import BasicInformationFields from './BasicInformationFields';
+import ClassificationFields from './ClassificationFields';
 
 const {useUniqueId} = hooks;
 
@@ -77,12 +75,6 @@ const CustomerForm = forwardRef((props, ref) => {
         innerRef={ref}
         initialValues={{
           ...initialData,
-          tags: initialData?.tags
-            ? initialData.tags.map((value) => ({
-                label: value,
-                value,
-              }))
-            : [],
         }}
         validationSchema={validationSchema}
         onSubmit={(values, {setSubmitting}) => {
@@ -100,32 +92,16 @@ const CustomerForm = forwardRef((props, ref) => {
         {({values, touched, errors, isSubmitting}) => (
           <Form>
             <FormContainer>
-              <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
-                <div className="lg:col-span-2">
-                  <BasicInformationFields
-                    touched={touched}
-                    errors={errors}
-                    values={values}
-                  />
-                  <PricingFields
-                    touched={touched}
-                    errors={errors}
-                    values={values}
-                  />
-                  <OrganizationFields
-                    touched={touched}
-                    errors={errors}
-                    values={values}
-                  />
-                </div>
-                <div className="lg:col-span-1">
-                  <CustomerImages
-                    touched={touched}
-                    errors={errors}
-                    values={values}
-                  />
-                </div>
-              </div>
+              <BasicInformationFields
+                touched={touched}
+                errors={errors}
+                values={values}
+              />
+              <ClassificationFields
+                touched={touched}
+                errors={errors}
+                values={values}
+              />
               <StickyFooter
                 className="-mx-8 px-8 flex items-center justify-between py-4"
                 stickyClass="border-t bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700"
@@ -167,21 +143,44 @@ CustomerForm.defaultProps = {
   type: 'edit',
   initialData: {
     id: '',
+    code: '',
+    // Basic Information
     name: '',
-    customerCode: '',
-    img: '',
-    imgList: [],
-    category: '',
-    price: 0,
-    stock: 0,
-    status: 0,
-    costPerItem: 0,
-    bulkDiscountPrice: 0,
-    taxRate: 6,
-    tags: [],
-    brand: '',
-    vendor: '',
-    description: '',
+    abbreviatedName: '',
+    avatar: '',
+    address: {
+      address: '',
+      ward: '',
+      district: '',
+      city: '',
+      country: '',
+    },
+    type: '',
+    foundedDate: '',
+    documentType: '',
+    documentNumber: '',
+    issuedDate: '',
+    issuedPlace: '',
+    companyTaxCode: '',
+    phoneNumber: '',
+    representative: {
+      fullName: '',
+      citizenIdentification: '',
+      position: '',
+    },
+    authorizedCapital: '',
+    currency: '',
+    // Classify
+    sector: '',
+    group: '',
+    businessType: '',
+    level1BusinessGroup: '',
+    level4BusinessGroup: '',
+    institutionalUnitLevel3: '',
+    // Profile Information
+    profileType: '',
+    status: '',
+    createdDate: '',
   },
 };
 

@@ -18,6 +18,40 @@
           "phoneNumber": "Phone Number",
           "status": "Status"
         }
+      },
+      "customerForm": {
+        "form": {
+          "name": "Name",
+          "abbreviatedName": "Abbreviated Name",
+          "address": {
+            "address": "Address",
+            "ward": "Ward",
+            "district": "District",
+            "city": "City",
+            "country": "Country"
+          },
+          "type": "Customer Type",
+          "foundedDate": "Founded Date",
+          "documentType": "Document Type",
+          "documentNumber": "Document Number",
+          "issuedDate": "Issued Date",
+          "issuedPlace": "Issued Place",
+          "companyTaxCode": "Company Tax Code",
+          "phoneNumber": "Phone Number",
+          "representative": {
+            "fullName": "representative.fullName",
+            "citizenIdentification": "representative.citizenIdentification",
+            "position": "representative.position"
+          },
+          "authorizedCapital": "authorizedCapital",
+          "currency": "currency",
+          "sector": "sector",
+          "group": "group",
+          "businessType": "businessType",
+          "level1BusinessGroup": "level1BusinessGroup",
+          "level4BusinessGroup": "level4BusinessGroup",
+          "institutionalUnitLevel3": "institutionalUnitLevel3"
+        }
       }
     }
   }

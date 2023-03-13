@@ -1,25 +1,25 @@
-import {createSlice, createAsyncThunk} from '@reduxjs/toolkit';
+import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
 import {
-  apiGetSalesCustomer,
-  apiPutSalesCustomer,
-  apiDeleteSalesCustomers,
-} from 'services/SalesService';
+  apiDeleteCrmCustomer,
+  apiGetCrmCustomer,
+  apiUpdateCrmCustomer,
+} from 'services/CrmService';
 
 export const getCustomer = createAsyncThunk(
   'customerEdit/data/getCustomers',
   async (data) => {
-    const response = await apiGetSalesCustomer(data);
+    const response = await apiGetCrmCustomer(data);
     return response.data;
   }
 );
 
 export const updateCustomer = async (data) => {
-  const response = await apiPutSalesCustomer(data);
+  const response = await apiUpdateCrmCustomer(data);
   return response.data;
 };
 
 export const deleteCustomer = async (data) => {
-  const response = await apiDeleteSalesCustomers(data);
+  const response = await apiDeleteCrmCustomer(data);
   return response.data;
 };
 

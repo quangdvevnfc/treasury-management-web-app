@@ -22,7 +22,7 @@ const CustomerTableTools = () => {
       </Link>
       <Link
         className="block lg:inline-block md:mb-0 mb-4"
-        to="/app/crm/customer-new"
+        to="/app/crm/customers/new"
       >
         <Button block variant="solid" size="sm" icon={<HiPlusCircle />}>
           Add Customer

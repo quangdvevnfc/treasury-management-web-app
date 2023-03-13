@@ -1,21 +1,14 @@
 import ApiService from './ApiService';
 
-export async function apiGetCrmDashboardData(data) {
+export async function apiGetCrmCustomers(data) {
   return ApiService.fetchData({
-    url: '/crm/dashboard',
-    method: 'get',
+    url: '/crm/customers/search',
+    method: 'post',
     data,
   });
 }
 
-export async function apiGetCrmCalendar() {
-  return ApiService.fetchData({
-    url: '/crm/calendar',
-    method: 'get',
-  });
-}
-
-export async function apiGetCrmCustomers(data) {
+export async function apiCreateCrmCustomer(data) {
   return ApiService.fetchData({
     url: '/crm/customers',
     method: 'post',
@@ -23,50 +16,24 @@ export async function apiGetCrmCustomers(data) {
   });
 }
 
-export async function apiGetCrmCustomersStatistic(params) {
+export async function apiUpdateCrmCustomer(id, data) {
   return ApiService.fetchData({
-    url: '/crm/customers-statistic',
-    method: 'get',
-    params,
-  });
-}
-
-export async function apPutCrmCustomer(data) {
-  return ApiService.fetchData({
-    url: '/crm/customers',
+    url: `/crm/customers/${id}`,
     method: 'put',
     data,
   });
 }
 
-export async function apiGetCrmCustomerDetails(params) {
+export async function apiGetCrmCustomer(id) {
   return ApiService.fetchData({
-    url: '/crm/customer-details',
+    url: `/crm/customers/${id}`,
     method: 'get',
-    params,
   });
 }
 
-export async function apiDeleteCrmCustomer(data) {
+export async function apiDeleteCrmCustomer(id) {
   return ApiService.fetchData({
-    url: '/crm/customer/delete',
+    url: `/crm/customers/${id}`,
     method: 'delete',
-    data,
-  });
-}
-
-export async function apiGetCrmMails(params) {
-  return ApiService.fetchData({
-    url: '/crm/mails',
-    method: 'get',
-    params,
-  });
-}
-
-export async function apiGetCrmMail(params) {
-  return ApiService.fetchData({
-    url: '/crm/mail',
-    method: 'get',
-    params,
   });
 }

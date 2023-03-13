@@ -3,13 +3,7 @@ import sortBy from 'utils/sortBy';
 import paginate from 'utils/paginate';
 
 export default function crmFakeApi(server, apiPrefix) {
-  server.get(`${apiPrefix}/crm/dashboard`, (schema) => {
-    return schema.db.crmDashboardData[0];
-  });
-
-  server.get(`${apiPrefix}/crm/calendar`, (schema) => schema.db.eventsData);
-
-  server.post(`${apiPrefix}/crm/customers`, (schema, {requestBody}) => {
+  server.post(`${apiPrefix}/crm/customers/search`, (schema, {requestBody}) => {
     const body = JSON.parse(requestBody);
     const {pageIndex, pageSize, sort, query} = body;
     const {order, key} = sort;
@@ -39,76 +33,31 @@ export default function crmFakeApi(server, apiPrefix) {
     return responseData;
   });
 
-  server.get(`${apiPrefix}/crm/customers-statistic`, () => {
-    return {
-      totalCustomers: {
-        value: 2420,
-        growShrink: 17.2,
-      },
-      activeCustomers: {
-        value: 1897,
-        growShrink: 32.7,
-      },
-      newCustomers: {
-        value: 241,
-        growShrink: -2.3,
-      },
-    };
+  server.post(`${apiPrefix}/crm/customers`, (schema, {requestBody}) => {
+    const data = JSON.parse(requestBody);
+    schema.db.userDetailData.insert(data);
+    return true;
   });
 
-  server.get(`${apiPrefix}/crm/customer-details`, (schema, {queryParams}) => {
-    const id = queryParams.id;
+  server.get(`${apiPrefix}/crm/customers/:id`, (schema, {params}) => {
+    const id = params.id;
     const user = schema.db.userDetailData.find(id);
     return user;
   });
 
-  server.del(`${apiPrefix}/crm/customer/delete`, (schema, {requestBody}) => {
-    const {id} = JSON.parse(requestBody);
+  server.del(`${apiPrefix}/crm/customers/:id`, (schema, {params}) => {
+    const id = params.id;
     schema.db.userDetailData.remove({id});
     return {};
   });
 
-  server.put(`${apiPrefix}/crm/customers`, (schema, {requestBody}) => {
-    const data = JSON.parse(requestBody);
-    const {id} = data;
-    schema.db.userDetailData.update({id}, data);
-    return {};
-  });
-
-  server.get(`${apiPrefix}/crm/mails`, (schema, {queryParams}) => {
-    const {category} = queryParams;
-    let data = schema.db.mailData;
-
-    if (category === 'sentItem') {
-      data = schema.db.mailData.where({group: 'sentItem'});
+  server.put(
+    `${apiPrefix}/crm/customers/:id`,
+    (schema, {params, requestBody}) => {
+      const id = params.id;
+      const data = JSON.parse(requestBody);
+      schema.db.userDetailData.update({id}, data);
+      return {};
     }
-
-    if (category === 'deleted') {
-      data = schema.db.mailData.where({group: 'deleted'});
-    }
-
-    if (category === 'draft') {
-      data = schema.db.mailData.where({group: 'draft'});
-    }
-
-    if (category === 'starred') {
-      data = schema.db.mailData.where({starred: true});
-    }
-
-    if (
-      category === 'work' ||
-      category === 'private' ||
-      category === 'important'
-    ) {
-      data = schema.db.mailData.where({label: category});
-    }
-
-    return data;
-  });
-
-  server.get(`${apiPrefix}/crm/mail`, (schema, {queryParams}) => {
-    const id = queryParams.id;
-    const mail = schema.db.mailData.find(id);
-    return mail;
-  });
+  );
 }

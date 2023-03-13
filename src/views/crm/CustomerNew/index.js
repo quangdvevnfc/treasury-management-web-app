@@ -2,13 +2,13 @@ import React from 'react';
 import CustomerForm from 'views/crm/CustomerForm';
 import {toast, Notification} from 'components/ui';
 import {useNavigate} from 'react-router-dom';
-import {apiCreateSalesCustomer} from 'services/SalesService';
+import {apiCreateCrmCustomer} from 'services/CrmService';
 
 const CustomerNew = () => {
   const navigate = useNavigate();
 
   const addCustomer = async (data) => {
-    const response = await apiCreateSalesCustomer(data);
+    const response = await apiCreateCrmCustomer(data);
     return response.data;
   };
 
